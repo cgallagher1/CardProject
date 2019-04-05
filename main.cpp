@@ -57,6 +57,16 @@ TEST_CASE("Test Cards")
         REQUIRE(c2.toString() == "10 of Hearts");
         REQUIRE(c3.toString() == "Ace of Spades");
     }
+
+    SECTION("Test equivalence")
+    {
+        Card c1(3, "Diamonds");
+        Card c2(3, "Diamonds");
+        Card c3(14, "Spades");
+
+        REQUIRE(c1.eqaul(c2) == true);
+        REQUIRE(c1.eqaul(c3) == false);
+    }
 }
 
 TEST_CASE("Test Deck")

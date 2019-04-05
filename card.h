@@ -16,6 +16,8 @@ public:
     string getSuit();
     void setSuit(string s);
 
+    bool eqaul(Card testCard);
+
 private:
     int cardNumber;
 };

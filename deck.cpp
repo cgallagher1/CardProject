@@ -39,3 +39,37 @@ int Deck::getLength()
 {
     return DeckOfCards.size();
 }
+
+void Deck::shuffle()
+{
+
+}
+
+bool Deck::equal(Deck testDeck)
+{
+    bool retval = true;
+
+    if(testDeck.DeckOfCards.size() != DeckOfCards.size())
+    {
+        retval = false;
+    }
+    else
+    {
+        for(int i = 0; i < DeckOfCards.size(); i++)
+        {
+            if(DeckOfCards.at(i).eqaul(testDeck.DeckOfCards.at(i)) == false)
+            {
+                retval = false;
+                break;
+            }
+        }
+        
+    }
+
+    return retval;
+}
+
+void Deck::deal(int totalToDeal)
+{
+
+}

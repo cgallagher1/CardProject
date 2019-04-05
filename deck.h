@@ -17,8 +17,6 @@ public:
 
     bool equal(Deck testDeck);
 
-    string getSuit();
-
     void deal(int totalToDeal);
 
 private:

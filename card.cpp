@@ -86,3 +86,19 @@ void Card::setSuit(string s)
         cardNumber = getNumericValue() - 2;
     }
 }
+
+bool Card::eqaul(Card testCard)
+{
+    bool retval = true;
+    
+    if(testCard.getSuit() != getSuit())
+    {
+        retval = false;
+    }
+    if(testCard.getNumericValue() != getNumericValue())
+    {
+        retval = false;
+    }
+
+    return retval;
+}
