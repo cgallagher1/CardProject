@@ -4,6 +4,7 @@ using namespace std;
 #define CATCH_CONFIG_RUNNER
 #include "catch.hpp"
 #include "card.h"
+#include "deck.h"
 
 int main()
 {
@@ -68,7 +69,7 @@ TEST_CASE("Test Deck")
         REQUIRE(deck1.getLength() == 52);
     }
 
-    SECTION("Test shuffle Deck")
+    /*SECTION("Test shuffle Deck")
     {
         Deck deck1;
         Deck deck2;
@@ -77,7 +78,7 @@ TEST_CASE("Test Deck")
         deck2.shuffle();
         
         //Test to see if the decks are the same
-        REQUIRE(deck1.equal(deck2));
+        REQUIRE(deck1.equal(deck2) == true);
     }
 
     SECTION("Test Dealing")
@@ -87,6 +88,6 @@ TEST_CASE("Test Deck")
         deck1.deal(7);
 
         REQUIRE(deck1.getLength() == 45);
-    }
+    }*/
     
 }
