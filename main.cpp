@@ -3,12 +3,15 @@ using namespace std;
 
 #define CATCH_CONFIG_RUNNER
 #include "catch.hpp"
+#include "card.h"
 
 int main()
 {
     cout << "Hello World!!!" << endl;
 
     Catch::Session().run();
+
+    system("pause");
 
     return 0;
 }
@@ -53,4 +56,37 @@ TEST_CASE("Test Cards")
         REQUIRE(c2.toString() == "10 of Hearts");
         REQUIRE(c3.toString() == "Ace of Spades");
     }
+}
+
+TEST_CASE("Test Deck")
+{
+    SECTION("Test create Deck")
+    {
+        Deck deck1;
+
+        //Test Size
+        REQUIRE(deck1.getLength() == 52);
+    }
+
+    SECTION("Test shuffle Deck")
+    {
+        Deck deck1;
+        Deck deck2;
+
+        //Shuffles deck 2
+        deck2.shuffle();
+        
+        //Test to see if the decks are the same
+        REQUIRE(deck1.equal(deck2));
+    }
+
+    SECTION("Test Dealing")
+    {
+        Deck deck1;
+
+        deck1.deal(7);
+
+        REQUIRE(deck1.getLength() == 45);
+    }
+    
 }
