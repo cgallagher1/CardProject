@@ -1,4 +1,5 @@
 #include <iostream>
+#include<algorithm>
 #include <vector>
 #include "card.h"
 #include "deck.h"
@@ -42,7 +43,8 @@ int Deck::getLength()
 
 void Deck::shuffle()
 {
-
+	//call algorithm's random_shuffle method to shuffle the vector of Cards 
+	random_shuffle(DeckOfCards.begin(), DeckOfCards.end());
 }
 
 bool Deck::equal(Deck testDeck)
@@ -57,7 +59,7 @@ bool Deck::equal(Deck testDeck)
     {
         for(int i = 0; i < DeckOfCards.size(); i++)
         {
-            if(DeckOfCards.at(i).eqaul(testDeck.DeckOfCards.at(i)) == false)
+            if(DeckOfCards.at(i).equal(testDeck.DeckOfCards.at(i)) == false)
             {
                 retval = false;
                 break;
@@ -71,5 +73,19 @@ bool Deck::equal(Deck testDeck)
 
 void Deck::deal(int totalToDeal)
 {
-
+	try {
+		if (DeckOfCards.size() < totalToDeal) {
+			throw "Not enough cards";
+		}
+		else 
+		{
+			for (int i = 0; i < totalToDeal; i++) 
+			{
+				DeckOfCards.pop_back();
+			}
+		}
+	}
+	catch (string e){
+		cout << "Error in Dealing: " << e << endl;
+	}
 }

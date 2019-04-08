@@ -87,7 +87,7 @@ void Card::setSuit(string s)
     }
 }
 
-bool Card::eqaul(Card testCard)
+bool Card::equal(Card testCard)
 {
     bool retval = true;
     

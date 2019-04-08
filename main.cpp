@@ -64,8 +64,8 @@ TEST_CASE("Test Cards")
         Card c2(3, "Diamonds");
         Card c3(14, "Spades");
 
-        REQUIRE(c1.eqaul(c2) == true);
-        REQUIRE(c1.eqaul(c3) == false);
+        REQUIRE(c1.equal(c2) == true);
+        REQUIRE(c1.equal(c3) == false);
     }
 }
 
@@ -79,7 +79,7 @@ TEST_CASE("Test Deck")
         REQUIRE(deck1.getLength() == 52);
     }
 
-    /*SECTION("Test shuffle Deck")
+    SECTION("Test shuffle Deck")
     {
         Deck deck1;
         Deck deck2;
@@ -88,16 +88,162 @@ TEST_CASE("Test Deck")
         deck2.shuffle();
         
         //Test to see if the decks are the same
-        REQUIRE(deck1.equal(deck2) == true);
+        REQUIRE(deck1.equal(deck2) == false);
     }
 
     SECTION("Test Dealing")
     {
         Deck deck1;
+        deck1.deal(5);
 
-        deck1.deal(7);
+        REQUIRE(deck1.getLength() == 47);
 
-        REQUIRE(deck1.getLength() == 45);
-    }*/
+		deck1.deal(7);
+
+		REQUIRE(deck1.getLength() == 40);
+
+		Deck deck2;
+
+		REQUIRE(deck2.getLength() == 52);
+
+    }
     
+}
+
+TEST_CASE("Test Evaluator")
+{
+	SECTION("Testing setup")
+	{
+
+		//create a deck
+		PokerEvaluator pe;
+		pe.dealCards();
+		
+		//7 hand poker check
+		REQUIRE(pe.Hand.size() == 7);
+
+		//Testing each hand
+
+	    
+		bool retval = false;
+
+		//pairs
+		for (int i = 0; i < 5; i++)
+		{
+			pe.dealCards();
+			if (pe.isPair(pe.Hand))
+			{
+				retval = true;
+				break;
+			}
+		}
+		REQUIRE(retval == true);
+		retval = false;
+
+		//two pair
+		for (int i = 0; i < ; i++)
+		{
+			pe.dealCards();
+			if (pe.isPair(pe.Hand))
+			{
+				retval = true;
+				break;
+			}
+		}
+		REQUIRE(retval == true);
+		retval = false;
+
+
+		//three OAK
+		for (int i = 0; i < 5; i++)
+		{
+			pe.dealCards();
+			if (pe.isPair(pe.Hand))
+			{
+				retval = true;
+				break;
+			}
+		}
+		REQUIRE(retval == true);
+		retval = false;
+
+
+		//straight
+		for (int i = 0; i < 5; i++)
+		{
+			pe.dealCards();
+			if (pe.isPair(pe.Hand))
+			{
+				retval = true;
+				break;
+			}
+		}
+		REQUIRE(retval == true);
+		retval = false;
+
+
+		//flush
+		for (int i = 0; i < 5; i++)
+		{
+			pe.dealCards();
+			if (pe.isPair(pe.Hand))
+			{
+				retval = true;
+				break;
+			}
+		}
+		REQUIRE(retval == true);
+		retval = false;
+
+		//full house
+		for (int i = 0; i < 5; i++)
+		{
+			pe.dealCards();
+			if (pe.isPair(pe.Hand))
+			{
+				retval = true;
+				break;
+			}
+		}
+		REQUIRE(retval == true);
+		retval = false;
+
+		//four of a kind
+		for (int i = 0; i < 5; i++)
+		{
+			pe.dealCards();
+			if (pe.isPair(pe.Hand))
+			{
+				retval = true;
+				break;
+			}
+		}
+		REQUIRE(retval == true);
+		retval = false;
+
+		//Straight flush
+		for (int i = 0; i < 5; i++)
+		{
+			pe.dealCards();
+			if (pe.isPair(pe.Hand))
+			{
+				retval = true;
+				break;
+			}
+		}
+		REQUIRE(retval == true);
+		retval = false;
+
+		//Royal Flush
+		for (int i = 0; i < 5; i++)
+		{
+			pe.dealCards();
+			if (pe.isPair(pe.Hand))
+			{
+				retval = true;
+				break;
+			}
+		}
+		REQUIRE(retval == true);
+		retval = false;
 }

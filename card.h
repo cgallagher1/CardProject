@@ -16,7 +16,7 @@ public:
     string getSuit();
     void setSuit(string s);
 
-    bool eqaul(Card testCard);
+    bool equal(Card testCard);
 
 private:
     int cardNumber;
