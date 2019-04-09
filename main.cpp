@@ -1,13 +1,17 @@
 #include <iostream>
+#include<ctime>
+#include<cstdlib>
 using namespace std;
 
 #define CATCH_CONFIG_RUNNER
 #include "catch.hpp"
 #include "card.h"
 #include "deck.h"
+#include "PokerEvaluator.h"
 
 int main()
 {
+	srand(unsigned(time(0)));
     cout << "Hello World!!!" << endl;
 
     Catch::Session().run();
@@ -107,6 +111,14 @@ TEST_CASE("Test Deck")
 		REQUIRE(deck2.getLength() == 52);
 
     }
+
+	SECTION("Validation")
+	{
+		Deck deck1;
+
+		REQUIRE(deck1.isUnique() == true);
+		REQUIRE(deck1.allThere() == true);
+	}
     
 }
 
@@ -117,10 +129,10 @@ TEST_CASE("Test Evaluator")
 
 		//create a deck
 		PokerEvaluator pe;
-		pe.dealCards();
-		
+		pe.dealHand();
+
 		//7 hand poker check
-		REQUIRE(pe.Hand.size() == 7);
+		REQUIRE(pe.getHand().size() == 7);
 
 		//Testing each hand
 
@@ -129,9 +141,8 @@ TEST_CASE("Test Evaluator")
 
 		//pairs
 		for (int i = 0; i < 5; i++)
-		{
-			pe.dealCards();
-			if (pe.isPair(pe.Hand))
+		{			
+			if (pe.isPair())
 			{
 				retval = true;
 				break;
@@ -141,10 +152,9 @@ TEST_CASE("Test Evaluator")
 		retval = false;
 
 		//two pair
-		for (int i = 0; i < ; i++)
+		for (int i = 0; i < 25; i++)
 		{
-			pe.dealCards();
-			if (pe.isPair(pe.Hand))
+			if (pe.isTwoPair())
 			{
 				retval = true;
 				break;
@@ -155,10 +165,9 @@ TEST_CASE("Test Evaluator")
 
 
 		//three OAK
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 50; i++)
 		{
-			pe.dealCards();
-			if (pe.isPair(pe.Hand))
+			if (pe.isThreeOfAKind())
 			{
 				retval = true;
 				break;
@@ -169,10 +178,9 @@ TEST_CASE("Test Evaluator")
 
 
 		//straight
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 300; i++)
 		{
-			pe.dealCards();
-			if (pe.isPair(pe.Hand))
+			if (pe.isStraight())
 			{
 				retval = true;
 				break;
@@ -183,10 +191,9 @@ TEST_CASE("Test Evaluator")
 
 
 		//flush
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 600; i++)
 		{
-			pe.dealCards();
-			if (pe.isPair(pe.Hand))
+			if (pe.isFlush())
 			{
 				retval = true;
 				break;
@@ -196,10 +203,9 @@ TEST_CASE("Test Evaluator")
 		retval = false;
 
 		//full house
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 800; i++)
 		{
-			pe.dealCards();
-			if (pe.isPair(pe.Hand))
+			if (pe.isFullHouse())
 			{
 				retval = true;
 				break;
@@ -209,10 +215,9 @@ TEST_CASE("Test Evaluator")
 		retval = false;
 
 		//four of a kind
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 5000; i++)
 		{
-			pe.dealCards();
-			if (pe.isPair(pe.Hand))
+			if (pe.isFourOfAKind())
 			{
 				retval = true;
 				break;
@@ -222,10 +227,9 @@ TEST_CASE("Test Evaluator")
 		retval = false;
 
 		//Straight flush
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 80000; i++)
 		{
-			pe.dealCards();
-			if (pe.isPair(pe.Hand))
+			if (pe.isStraightFlush())
 			{
 				retval = true;
 				break;
@@ -235,15 +239,89 @@ TEST_CASE("Test Evaluator")
 		retval = false;
 
 		//Royal Flush
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 1000000; i++)
 		{
-			pe.dealCards();
-			if (pe.isPair(pe.Hand))
+			if (pe.isRoyalFlush())
 			{
 				retval = true;
 				break;
 			}
 		}
 		REQUIRE(retval == true);
-		retval = false;
+
+
+
+		//Evaluate
+		vector<Card> testHighCard = {
+			Card(2, "Spades"),
+			Card(4, "Hearts"),
+			Card(6, "Clubs"),
+			Card(10, "Clubs"),
+			Card(8, "Hearts"),
+			Card(9, "Hearts"),
+			Card(14, "Diamonds"),
+		};
+
+		REQUIRE(pe.evaluate(testHighCard) == "High Card");
+
+		vector<Card> testPair = {
+			Card(2, "Spades"),
+			Card(4, "Hearts"),
+			Card(6, "Clubs"),
+			Card(10, "Clubs"),
+			Card(8, "Hearts"),
+			Card(9, "Hearts"),
+			Card(2, "Diamonds"),
+		};
+
+		REQUIRE(pe.evaluate(testPair) == "Pair");
+
+		vector<Card> testStraight = {
+			Card(2, "Spades"),
+			Card(9, "Hearts"),
+			Card(6, "Clubs"),
+			Card(4, "Clubs"),
+			Card(5, "Hearts"),
+			Card(3, "Hearts"),
+			Card(2, "Diamonds"),
+		};
+
+		REQUIRE(pe.evaluate(testStraight) == "Straight");
+
+		vector<Card> testFlush = {
+			Card(5, "Hearts"),
+			Card(9, "Hearts"),
+			Card(6, "Hearts"),
+			Card(4, "Clubs"),
+			Card(11, "Hearts"),
+			Card(3, "Spades"),
+			Card(2, "Hearts"),
+		};
+
+		REQUIRE(pe.evaluate(testFlush) == "Flush");
+
+		vector<Card> testFullHouse = {
+			Card(3, "Hearts"),
+			Card(3, "Clubs"),
+			Card(4, "Spades"),
+			Card(4, "Clubs"),
+			Card(11, "Hearts"),
+			Card(4, "Hearts"),
+			Card(2, "Hearts"),
+		};
+
+		REQUIRE(pe.evaluate(testFullHouse) == "Full House");
+
+		vector<Card> testRoyalFlush = {
+			Card(10, "Spades"),
+			Card(12, "Spades"),
+			Card(14, "Spades"),
+			Card(4, "Clubs"),
+			Card(11, "Spades"),
+			Card(13, "Spades"),
+			Card(2, "Hearts"),
+		};
+
+		REQUIRE(pe.evaluate(testRoyalFlush) == "Royal Flush");
+	}
 }

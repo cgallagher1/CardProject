@@ -3,6 +3,9 @@
 #include <vector>
 #include "card.h"
 #include "deck.h"
+#include <map>
+#include<ctime>
+#include<cstdlib>
 
 using namespace std;
 
@@ -89,3 +92,54 @@ void Deck::deal(int totalToDeal)
 		cout << "Error in Dealing: " << e << endl;
 	}
 }
+
+bool Deck::isUnique()
+{
+	map<string, int> uniqueMap;
+
+
+	for (int i = 0; i < DeckOfCards.size(); i++)
+	{
+		if (uniqueMap[DeckOfCards[i].toString()] == 1) {
+			return false;
+		}
+		uniqueMap[DeckOfCards[i].toString()]++;
+	}
+	return true;
+}
+
+bool Deck::allThere()
+{
+	map<string, int> allThereMap;
+	string key;
+	string suits[] = { "Clubs", "Diamonds", "Hearts", "Spades" };
+	for (int i = 0; i < 4; i++)
+	{
+		for (int num = 2; num <= 14; num++)
+		{
+			Card c(num, suits[i]);
+			allThereMap[c.toString()]++;
+		}
+	}
+
+	for (int i = 0; i < DeckOfCards.size(); i++) 
+	{
+		allThereMap[DeckOfCards[i].toString()]++;
+	}
+
+	for (map<string, int>::iterator it = allThereMap.begin(); it != allThereMap.end(); ++it) 
+	{
+		if (it->second != 2)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+vector<Card> Deck::getDeck()
+{
+	return DeckOfCards;
+}
+
+

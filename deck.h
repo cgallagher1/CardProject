@@ -19,6 +19,12 @@ public:
 
     void deal(int totalToDeal);
 
+	bool isUnique();
+
+	bool allThere();
+
+	vector<Card> getDeck();
+
 private:
 vector <Card> DeckOfCards;
 };

@@ -102,3 +102,4 @@ bool Card::equal(Card testCard)
 
     return retval;
 }
+
