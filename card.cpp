@@ -11,11 +11,13 @@ Card::Card(int n, string s)
     setNumericValue(n);
     setSuit(s);
 }
-//--
+
+//Allows tells the Card how to "print" itself
 string Card::toString()
 {
     string retVal;
     int cardNumber = getNumericValue();
+    //If cardnumber > 10 then we need to change to J,Q,K,A
     if (cardNumber <= 10)
     {
         retVal = to_string(cardNumber);
@@ -41,12 +43,12 @@ string Card::toString()
 
     return retVal;
 }
-//--
+//Returns the numericValue
 int Card::getNumericValue()
 {
     return (cardNumber % 13) + 2;
 }
-//--
+//Sets the numericValue
 void Card::setNumericValue(int n)
 {
     int suitStart = cardNumber / 13;
@@ -59,12 +61,13 @@ void Card::setNumericValue(int n)
         cardNumber = suitStart;
     }
 }
+//Returns the Cards suit
 string Card::getSuit()
 {
     string suits[] = { "Clubs", "Diamonds", "Hearts", "Spades" };
     return suits[cardNumber / 13];
 }
-//--
+//Sets the Suit
 void Card::setSuit(string s)
 {
     if (s == "Clubs") 
@@ -89,6 +92,8 @@ void Card::setSuit(string s)
     }
 }
 
+//To check if two cards are equal they need to have the same
+//value and suit
 bool Card::equal(Card testCard)
 {
     bool retval = true;
