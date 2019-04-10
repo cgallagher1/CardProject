@@ -485,6 +485,18 @@ bool PokerEvaluator::isRoyalFlush(vector<Card> cards)
 	sort(cards.begin(), cards.end(), compareSuit);
 	vector <Card> onlyCardsInFlush;
 	int counter = 1;
+
+	for (int i = 0; i < cards.size(); i++) {
+		if (cards[i].getNumericValue() < 10) {
+			cards.erase(cards.begin() + i);
+			i--;
+		}
+	}
+
+	if (cards.size() < 5) {
+		return false;
+	}
+
 	for (unsigned int i = 0; i < cards.size() - 1; i++)
 	{
 		onlyCardsInFlush.push_back(cards[i]);

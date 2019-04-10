@@ -340,6 +340,21 @@ TEST_CASE("Test Evaluator")
 
 		REQUIRE(pe.evaluate(testFullHouse) == "Full House");
 
+
+		//Forces a Full House over TOAK
+		vector<Card> testFullHouseOverTOAK = {
+			Card(3, "Hearts"),
+			Card(3, "Clubs"),
+			Card(4, "Spades"),
+			Card(4, "Clubs"),
+			Card(3, "Hearts"),
+			Card(4, "Hearts"),
+			Card(2, "Hearts"),
+		};
+
+		REQUIRE(pe.evaluate(testFullHouseOverTOAK) == "Full House");
+
+
 		//Forces a Royal Flush
 		vector<Card> testRoyalFlush = {
 			Card(10, "Spades"),
@@ -352,5 +367,19 @@ TEST_CASE("Test Evaluator")
 		};
 
 		REQUIRE(pe.evaluate(testRoyalFlush) == "Royal Flush");
+
+		//Forces a Royal Flush over Straight Flush
+		vector<Card> testRoyalFlushOverSE = {
+			Card(10, "Spades"),
+			Card(12, "Spades"),
+			Card(14, "Spades"),
+			Card(9, "Spades"),
+			Card(11, "Spades"),
+			Card(13, "Spades"),
+			Card(2, "Hearts"),
+		};
+
+		REQUIRE(pe.evaluate(testRoyalFlushOverSE) == "Royal Flush");
 	}
+
 }
