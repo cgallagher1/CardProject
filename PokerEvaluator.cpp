@@ -3,19 +3,24 @@
 #include "card.h"
 #include <algorithm>
 
+//Construct the PokerEvaluator(PE)
 PokerEvaluator::PokerEvaluator()
 {
 
 }
 
+//Sort by numbers
 bool compareNumeric(Card a, Card b) {
 	return a.getNumericValue() < b.getNumericValue();
 }
 
+//Sort Alphabetically
 bool compareSuit(Card a, Card b) {
 	return a.getSuit() < b.getSuit();
 }
 
+//dealHands creates a deck, shuffles it, and then draws 7 cards and
+//adds those 7 cards to the vector of Cards called Hand
 void PokerEvaluator::dealHand()
 {
 	Deck deck;
@@ -32,12 +37,14 @@ void PokerEvaluator::dealHand()
 }
 
 
-
+//Returns the Hand
 vector<Card> PokerEvaluator::getHand()
 {
 	return Hand;
 }
 
+//Is Pair without a parameter simply returns true
+//if the private member Hand has a Pair
 bool PokerEvaluator::isPair()
 {
 	dealHand();
@@ -52,6 +59,8 @@ bool PokerEvaluator::isPair()
 	return retval;
 }
 
+//Is Pair with a parameter returns true
+//if the cards that were passed in have a pair in them
 bool PokerEvaluator::isPair(vector<Card> cards)
 {
 	bool retval = false;
@@ -65,7 +74,8 @@ bool PokerEvaluator::isPair(vector<Card> cards)
 	return retval;
 }
 
-//Checks if the deal is two pair
+//Is Two Pair without a parameter simply returns true
+//if the private member Hand has Two Pair
 bool PokerEvaluator::isTwoPair()
 {
 	dealHand();
@@ -91,7 +101,8 @@ bool PokerEvaluator::isTwoPair()
 	return retval;
 }
 
-//Checks if the deal is two pair
+//Is Two Pair with a parameter returns true
+//if the cards that were passed in have Two Pair
 bool PokerEvaluator::isTwoPair(vector<Card> cards)
 {
 	bool retval = false;
@@ -116,7 +127,8 @@ bool PokerEvaluator::isTwoPair(vector<Card> cards)
 	return retval;
 }
 
-//Checks if the deal is three of a kind
+//Is Three Of A Kind without a parameter simply returns true
+//if the private member Hand has Three Of A Kind
 bool PokerEvaluator::isThreeOfAKind()
 {
 	dealHand();
@@ -133,7 +145,8 @@ bool PokerEvaluator::isThreeOfAKind()
 	return retval;
 }
 
-//Checks if the deal is three of a kind
+//Is Three Of A Kind with a parameter returns true
+//if the cards passed in have a Three Of A Kind
 bool PokerEvaluator::isThreeOfAKind(vector<Card> cards)
 {
 	bool retval = false;
@@ -149,7 +162,8 @@ bool PokerEvaluator::isThreeOfAKind(vector<Card> cards)
 	return retval;
 }
 
-//Checks if the deal is a straight
+//Is Straight without a parameter simply returns true
+//if the private member Hand has a Straight
 bool PokerEvaluator::isStraight()
 {
 	dealHand();
@@ -189,6 +203,8 @@ bool PokerEvaluator::isStraight()
 	return retval;
 }
 
+//Is Straight with a parameter simply true
+//if the cards passed in have a Straight
 bool PokerEvaluator::isStraight(vector<Card> cards)
 {
 	bool retval = false;
@@ -227,7 +243,8 @@ bool PokerEvaluator::isStraight(vector<Card> cards)
 	return retval;
 }
 
-//Checks if the deal is a flush
+//Is Flush without a parameter simply returns true
+//if the private member Hand has a Flush
 bool PokerEvaluator::isFlush()
 {
 	bool retval = false;
@@ -254,7 +271,8 @@ bool PokerEvaluator::isFlush()
 	return retval;
 }
 
-//Checks if the deal is a flush
+//Is Flush with a parameter returns true
+//if the cards passed in have a Flush
 bool PokerEvaluator::isFlush(vector<Card> cards)
 {
 	bool retval = false;
@@ -280,7 +298,8 @@ bool PokerEvaluator::isFlush(vector<Card> cards)
 	return retval;
 }
 
-//Checks if the deal is a full house
+//Is Full House without a parameter simply returns true
+//if the private member Hand has a Full House
 bool PokerEvaluator::isFullHouse()
 {
 	dealHand();
@@ -295,7 +314,8 @@ bool PokerEvaluator::isFullHouse()
 	return retval;
 }
 
-//Checks if the deal is a full house
+//Is Full House with a parameter returns true
+//if the cards passed in have a Full House
 bool PokerEvaluator::isFullHouse(vector<Card> cards)
 {
 	bool retval = false;
@@ -309,6 +329,8 @@ bool PokerEvaluator::isFullHouse(vector<Card> cards)
 	return retval;
 }
 
+//Is Four of a Kind without a parameter returns true
+//if the private member Hand has a Flush
 bool PokerEvaluator::isFourOfAKind()
 {
 	dealHand();
@@ -329,7 +351,8 @@ bool PokerEvaluator::isFourOfAKind()
 	return retval;
 }
 
-
+//Is Four of a Kind with a parameter returns true
+//if the cards passed in have Four Of A Kind
 bool PokerEvaluator::isFourOfAKind(vector<Card> cards)
 {
 	bool retval = false;
@@ -349,7 +372,8 @@ bool PokerEvaluator::isFourOfAKind(vector<Card> cards)
 	return retval;
 }
 
-//Checks if the deal is a straight flush
+//Is Four of a Kind without a parameter returns true
+//if the private member Hand has a Flush
 bool PokerEvaluator::isStraightFlush()
 {
 	dealHand();
@@ -382,7 +406,8 @@ bool PokerEvaluator::isStraightFlush()
 	return retval;
 }
 
-//Checks if the deal is a straight flush
+//Is Straigh Flush with a parameter returns true
+//if the passed in cards have a Straight Flush
 bool PokerEvaluator::isStraightFlush(vector<Card> cards)
 {
 	bool retval = false;
@@ -414,7 +439,8 @@ bool PokerEvaluator::isStraightFlush(vector<Card> cards)
 	return retval;
 }
 
-//Checks if the deal is a royal flush
+//Is Royal Flush without a parameter simply returns true
+//if the private member Hand has a Royal Flush
 bool PokerEvaluator::isRoyalFlush()
 {
 	dealHand();
@@ -451,7 +477,8 @@ bool PokerEvaluator::isRoyalFlush()
 	return retval;
 }
 
-//Checks if the deal is a royal flush
+//Is Royal Flush with a parameter returns true
+//if the cards passed in have a Royal Flush
 bool PokerEvaluator::isRoyalFlush(vector<Card> cards)
 {
 	bool retval = false;
@@ -487,6 +514,8 @@ bool PokerEvaluator::isRoyalFlush(vector<Card> cards)
 	return retval;
 }
 
+//Evaluates the 7 cards passed in and starts at the top at the heiarchy
+//and returns the best hand
 string PokerEvaluator::evaluate(vector<Card> cards) {
 	sort(cards.begin(), cards.end(), compareNumeric);
 	if (isRoyalFlush(cards))

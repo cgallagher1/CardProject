@@ -11,6 +11,8 @@ using namespace std;
 
 using namespace std;
 
+//Deck should create all 52 cards and save those cards in
+//the vector of Cards called Deck of Cards
 Deck::Deck()
 {
 	for (unsigned int i = 2; i < 15; i++)
@@ -39,17 +41,21 @@ Deck::Deck()
 
 }
 
+//Returns the size of the Deck
 int Deck::getLength()
 {
     return DeckOfCards.size();
 }
 
+//Shuffle uses the built in random_shuffle from the algorithms library
+//to shuffle the deck
 void Deck::shuffle()
 {
 	//call algorithm's random_shuffle method to shuffle the vector of Cards 
 	random_shuffle(DeckOfCards.begin(), DeckOfCards.end());
 }
 
+//Two decks are equal if all the cards are in the same order
 bool Deck::equal(Deck testDeck)
 {
     bool retval = true;
@@ -74,6 +80,7 @@ bool Deck::equal(Deck testDeck)
     return retval;
 }
 
+//Deals pops off x amount of cards from the vector of Cards
 void Deck::deal(int totalToDeal)
 {
 	try {
@@ -93,6 +100,10 @@ void Deck::deal(int totalToDeal)
 	}
 }
 
+//Use the toString of the Card class to use that string as a key and
+//creates a map where that string is a key and we increment every time we see
+//that key. A unique deck should only increment once and if it is greater than one,
+//we know it is not unique
 bool Deck::isUnique()
 {
 	map<string, int> uniqueMap;
@@ -108,6 +119,9 @@ bool Deck::isUnique()
 	return true;
 }
 
+//allThere prepopulates a map with all the cards once, then we create a deck
+//and increment the map at every card in the deck and we know all 52 are there if 
+//every key in the map has a value of 2
 bool Deck::allThere()
 {
 	map<string, int> allThereMap;
@@ -137,6 +151,7 @@ bool Deck::allThere()
 	return true;
 }
 
+//Returns the vector of Cards
 vector<Card> Deck::getDeck()
 {
 	return DeckOfCards;
