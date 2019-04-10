@@ -3,6 +3,8 @@
 
 using namespace std;
 
+//Card Constructor should take a value and string that should be
+//Hearts, Clubs, Spades, or Diamonds
 Card::Card(int n, string s)
 {
     cardNumber = 0;
